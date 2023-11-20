@@ -1,6 +1,4 @@
 ---
-import { getImage } from "astro:assets";
-
 interface Props {
 	isDarkSquare: boolean;
 	isDarkPiece?: boolean;
@@ -9,32 +7,20 @@ interface Props {
 	index: number;
 }
 const { isDarkSquare, isDarkPiece, isLightPiece, pieces, index } = Astro.props;
-
-import lightBishop from "@/pieceImages/lightBishop.svg";
-import lightKing from "@/pieceImages/lightKing.svg";
-import lightKnight from "@/pieceImages/lightKnight.svg";
-import lightQueen from "@/pieceImages/lightQueen.svg";
-import lightRook from "@/pieceImages/lightRook.svg";
-import darkBishop from "@/pieceImages/darkBishop.svg";
-import darkKing from "@/pieceImages/darkKing.svg";
-import darkKnight from "@/pieceImages/darkKnight.svg";
-import darkQueen from "@/pieceImages/darkQueen.svg";
-import darkRook from "@/pieceImages/darkRook.svg";
-
 const pieceImages = {
 	light: {
-		B: await getImage({ src: lightBishop }),
-		K: await getImage({ src: lightKing }),
-		N: await getImage({ src: lightKnight }),
-		Q: await getImage({ src: lightQueen }),
-		R: await getImage({ src: lightRook }),
+		B: "/pieceImages/lightBishop.svg",
+		K: "/pieceImages/lightKing.svg",
+		N: "/pieceImages/lightKnight.svg",
+		Q: "/pieceImages/lightQueen.svg",
+		R: "/pieceImages/lightRook.svg",
 	},
 	dark: {
-		B: await getImage({ src: darkBishop }),
-		K: await getImage({ src: darkKing }),
-		N: await getImage({ src: darkKnight }),
-		Q: await getImage({ src: darkQueen }),
-		R: await getImage({ src: darkRook }),
+		B: "/pieceImages/darkBishop.svg",
+		K: "/pieceImages/darkKing.svg",
+		N: "/pieceImages/darkKnight.svg",
+		Q: "/pieceImages/darkQueen.svg",
+		R: "/pieceImages/darkRook.svg",
 	},
 };
 ---
@@ -61,7 +47,7 @@ const pieceImages = {
 						? `background: url('${
 								pieceImages[
 									isDarkPiece ? "dark" : ("light" as "dark" | "light")
-								][pieces[index % 8] as "B" | "K" | "N" | "Q" | "R"].src
+								][pieces[index % 8] as "B" | "K" | "N" | "Q" | "R"]
 						  }') no-repeat center center/contain;`
 						: ""
 				}

@@ -48,7 +48,7 @@ const { pieces } = Astro.props;
 				</p>
 				<p>
 					Black's pieces from its left to right are:
-					{pieces.toReversed().map((piece) => {
+					{pieces.reverse().map((piece) => {
 						return <span class="mr-0.5">{piece}</span>;
 					})}
 				</p>

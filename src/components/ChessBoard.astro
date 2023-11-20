@@ -39,14 +39,14 @@ const { pieces } = Astro.props;
 	</section>
 	{
 		pieces && (
-			<section class="flex flex-col gap-y-2">
-				<p>
+			<section class="flex flex-col gap-y-4">
+				<p class="leading-tight">
 					White's pieces from its left to right are:
 					{pieces.map((piece) => {
 						return <span class="mr-0.5">{piece}</span>;
 					})}
 				</p>
-				<p>
+				<p class="leading-tight">
 					Black's pieces from its left to right are:
 					{pieces.reverse().map((piece) => {
 						return <span class="mr-0.5">{piece}</span>;

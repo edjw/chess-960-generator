@@ -1,0 +1,71 @@
+---
+import { getImage } from "astro:assets";
+
+interface Props {
+	isDarkSquare: boolean;
+	isDarkPiece?: boolean;
+	isLightPiece?: boolean;
+	pieces?: string[];
+	index: number;
+}
+const { isDarkSquare, isDarkPiece, isLightPiece, pieces, index } = Astro.props;
+
+import lightBishop from "@/pieceImages/lightBishop.svg";
+import lightKing from "@/pieceImages/lightKing.svg";
+import lightKnight from "@/pieceImages/lightKnight.svg";
+import lightQueen from "@/pieceImages/lightQueen.svg";
+import lightRook from "@/pieceImages/lightRook.svg";
+import darkBishop from "@/pieceImages/darkBishop.svg";
+import darkKing from "@/pieceImages/darkKing.svg";
+import darkKnight from "@/pieceImages/darkKnight.svg";
+import darkQueen from "@/pieceImages/darkQueen.svg";
+import darkRook from "@/pieceImages/darkRook.svg";
+
+const pieceImages = {
+	light: {
+		B: await getImage({ src: lightBishop }),
+		K: await getImage({ src: lightKing }),
+		N: await getImage({ src: lightKnight }),
+		Q: await getImage({ src: lightQueen }),
+		R: await getImage({ src: lightRook }),
+	},
+	dark: {
+		B: await getImage({ src: darkBishop }),
+		K: await getImage({ src: darkKing }),
+		N: await getImage({ src: darkKnight }),
+		Q: await getImage({ src: darkQueen }),
+		R: await getImage({ src: darkRook }),
+	},
+};
+---
+
+<div
+	class={`border w-full h-full flex items-center justify-center p-0 ${
+		isDarkSquare ? "bg-gray-600 text-white" : "bg-white text-black"
+	}`}
+	data-piece={(isDarkPiece || isLightPiece) && pieces
+		? pieces[index % 8]
+		: undefined}
+	data-piece-color={isDarkPiece ? "dark" : isLightPiece ? "light" : undefined}
+>
+	{
+		(isLightPiece || isDarkPiece) && pieces && (
+			<span
+				class="w-full h-full"
+				data-piece={pieces[index % 8]}
+				data-piece-color={
+					isDarkPiece ? "dark" : isLightPiece ? "light" : undefined
+				}
+				style={
+					(isDarkPiece || isLightPiece) && pieces
+						? `background: url('${
+								pieceImages[
+									isDarkPiece ? "dark" : ("light" as "dark" | "light")
+								][pieces[index % 8] as "B" | "K" | "N" | "Q" | "R"].src
+						  }') no-repeat center center/contain;`
+						: ""
+				}
+			/>
+		)
+	}
+</div>

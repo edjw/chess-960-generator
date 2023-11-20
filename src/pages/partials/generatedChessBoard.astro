@@ -1,0 +1,21 @@
+---
+export const partial = true;
+export const prerender = false;
+
+import { allChess960Positions } from "@/data/allChess960Positions";
+import BlankChessBoard from "@/components/ChessBoard.astro";
+
+function getRandomNumberBetween0And960(): number {
+	return Math.floor(Math.random() * 961);
+}
+
+function getRandomPosition() {
+	const randomNumberBetween0And960 = getRandomNumberBetween0And960();
+	const randomPositions = allChess960Positions[randomNumberBetween0And960];
+	return Array.from(randomPositions);
+}
+
+const startingPosition = getRandomPosition();
+---
+
+<BlankChessBoard pieces={startingPosition} />

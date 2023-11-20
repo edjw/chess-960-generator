@@ -1,0 +1,66 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="description"
+			content="Astro description"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width"
+		/>
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/favicon.svg"
+		/>
+		<meta
+			name="generator"
+			content={Astro.generator}
+		/>
+		<title>{title}</title>
+
+		<script>
+			import htmx from "htmx.org";
+			window.htmx = htmx;
+			htmx.config.globalViewTransitions = true;
+		</script>
+	</head>
+	<body
+		class="pt-4 pb-4 grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-[100vh] prose gap-y-2 px-1 sm:px-8 mx-auto min-w-[24rem]"
+	>
+		<header>
+			<h1 class="mb-1 text-lg">{title}</h1>
+		</header>
+
+		<main class="flex flex-col gap-y-8">
+			<slot />
+		</main>
+
+		<footer class="flex flex-col gap-y-2">
+			<p class="text-gray-800 text-sm">
+				Chess 960 positions used are from <a
+					href="https://www.mark-weeks.com/cfaa/chess960/c960strt.htm"
+					class="underline"
+					>Mark Week's Chess960 [Fischer Random Chess] Start Positions</a
+				>
+			</p>
+			<p class="text-gray-800 text-sm">
+				<a
+					href="https://en.wikipedia.org/wiki/Fischer_random_chess"
+					class="underline"
+					>See the Wikipedia page for Chess960</a
+				>
+			</p>
+		</footer>
+	</body>
+</html>

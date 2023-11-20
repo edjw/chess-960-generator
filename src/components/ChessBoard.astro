@@ -1,0 +1,58 @@
+---
+import { darkSquares } from "@/data/chessboardSquareColours";
+import {
+	darkPiecesStartingPositions,
+	lightPiecesStartingPositions,
+} from "@/data/piecesStartingPositions";
+import Square from "@/components/Square.astro";
+
+interface Props {
+	pieces?: string[];
+}
+const { pieces } = Astro.props;
+---
+
+<div class="flex flex-col gap-y-4">
+	<section
+		class="grid grid-cols-8 grid-rows-8 auto-rows-[3rem] auto-cols-[3rem] max-w-sm md:auto-rows-[3.5rem] md:auto-cols-[3.5rem] md:max-w-md lg:auto-rows-[4rem] lg:auto-cols-[4rem] lg:max-w-lg xl:auto-rows-[4.5rem] xl:auto-cols-[4.5rem] xl:max-w-xl"
+	>
+		{
+			Array(64)
+				.fill(undefined)
+				.map((_, index) => {
+					const isDarkSquare = darkSquares.includes(index + 1);
+					const isDarkPiece =
+						pieces && darkPiecesStartingPositions.includes(index + 1);
+					const isLightPiece =
+						pieces && lightPiecesStartingPositions.includes(index + 1);
+					return (
+						<Square
+							isDarkSquare={isDarkSquare}
+							isDarkPiece={isDarkPiece}
+							isLightPiece={isLightPiece}
+							pieces={pieces}
+							index={index}
+						/>
+					);
+				})
+		}
+	</section>
+	{
+		pieces && (
+			<section class="flex flex-col gap-y-2">
+				<p>
+					White's pieces from its left to right are:
+					{pieces.map((piece) => {
+						return <span>{piece}</span>;
+					})}
+				</p>
+				<p>
+					Black's pieces from its left to right are:
+					{pieces.toReversed().map((piece) => {
+						return <span>{piece}</span>;
+					})}
+				</p>
+			</section>
+		)
+	}
+</div>

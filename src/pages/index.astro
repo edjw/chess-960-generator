@@ -10,11 +10,15 @@ import BlankChessBoard from "@/components/ChessBoard.astro";
 		</div>
 		<div>
 			<button
-				class="border px-4 py-2 rounded-lg text-2xl"
+				class="border px-4 py-2 rounded-lg text-2xl flex items-center select-none gap-x-2"
 				hx-get="/partials/generatedChessBoard"
 				hx-target="#chessboard"
-				>Generate a board</button
-			>
+				>Generate a board
+				<img
+					class="my-0 opacity-0 htmx-indicator h-7"
+					src="/spinner.svg"
+				/>
+			</button>
 		</div>
 	</div>
 </Layout>

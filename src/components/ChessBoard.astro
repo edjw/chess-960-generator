@@ -10,7 +10,10 @@ interface Props {
 	pieces?: string[];
 }
 const { pieces } = Astro.props;
-const piecesReversed = [...pieces].reverse();
+let piecesReversed;
+if (pieces) {
+    piecesReversed = [...pieces].reverse();
+}
 ---
 
 <div class="flex flex-col gap-y-4">

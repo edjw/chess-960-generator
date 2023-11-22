@@ -9,10 +9,12 @@ import Square from "@/components/Square.astro";
 interface Props {
 	pieces?: string[];
 }
+
 const { pieces } = Astro.props;
-let piecesReversed;
+
+let piecesReversed: string[] = [];
 if (pieces) {
-    piecesReversed = [...pieces].reverse();
+	piecesReversed = [...pieces].reverse();
 }
 ---
 
@@ -42,18 +44,18 @@ if (pieces) {
 		}
 	</section>
 	{
-		pieces && piecesReversed && (
+		pieces && piecesReversed.length && (
 			<section class="flex flex-col gap-y-4">
-				<p class="leading-tight">
+				<p class="flex gap-x-1 leading-tight">
 					White's pieces from its left to right are:
 					{pieces.map((piece) => {
-						return <span class="mr-0.5">{piece}</span>;
+						return <span>{piece}</span>;
 					})}
 				</p>
-				<p class="leading-tight">
+				<p class="flex gap-x-1 leading-tight">
 					Black's pieces from its left to right are:
 					{piecesReversed.map((piece) => {
-						return <span class="mr-0.5">{piece}</span>;
+						return <span>{piece}</span>;
 					})}
 				</p>
 			</section>
